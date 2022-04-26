@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="22"
-  DTS:VersionGUID="{06F4FB08-4BD8-4E3B-9155-AFD5BDC8B684}">
+  DTS:VersionBuild="25"
+  DTS:VersionGUID="{91383378-8B65-4D4F-BE75-723C6CD83F3A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -155,6 +155,111 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\Data Flow Task\Compatible"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Compatible"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Compatible.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Compatible.Inputs[Derived Column Input].Columns[HomeTeam]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="HomeTeam"
+                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Compatible.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Compatible.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Compatible.Outputs[Derived Column Output].Columns[ReverseColumn]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Compatible.Outputs[Derived Column Output].Columns[ReverseColumn]"
+                      name="ReverseColumn"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[REVERSE](#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">REVERSE(HomeTeam)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Compatible.Outputs[Derived Column Output].Columns[UpperColumn]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Compatible.Outputs[Derived Column Output].Columns[UpperColumn]"
+                      name="UpperColumn"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[UPPER](#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">UPPER(HomeTeam)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Compatible.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Compatible.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Compatible.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Compatible.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Compatible.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Compatible.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\Data Flow Task\Conditional Split"
               componentClassID="Microsoft.ConditionalSplit"
@@ -348,260 +453,6 @@
                       refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\Derived Column 1"
-              componentClassID="Microsoft.DerivedColumn"
-              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="Derived Column 1"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\Derived Column 1.Inputs[Derived Column Input]"
-                  description="Input to the Derived Column Transformation"
-                  name="Derived Column Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Derived Column 1.Inputs[Derived Column Input].Columns[HomeTeam]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="HomeTeam"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output]"
-                  description="Default Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  name="Derived Column Output"
-                  synchronousInputId="Package\Data Flow Task\Derived Column 1.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[conditionalColumn]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[conditionalColumn]"
-                      name="conditionalColumn"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">[UPPER](#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]})</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">UPPER(HomeTeam)</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[conditionalColumn2]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[conditionalColumn2]"
-                      name="conditionalColumn2"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">NULL(DT_I4)</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">NULL(DT_I4)</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[conditionalColumn3]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      length="2"
-                      lineageId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[conditionalColumn3]"
-                      name="conditionalColumn3"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">[LEFT](#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]},2)</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">LEFT(HomeTeam,2)</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Error Output]"
-                  description="Error Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Derived Column Error Output"
-                  synchronousInputId="Package\Data Flow Task\Derived Column 1.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\Derived Column 2"
-              componentClassID="Microsoft.DerivedColumn"
-              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="Derived Column 2"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\Derived Column 2.Inputs[Derived Column Input]"
-                  description="Input to the Derived Column Transformation"
-                  name="Derived Column Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Derived Column 2.Inputs[Derived Column Input].Columns[HomeTeam]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="HomeTeam"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output]"
-                  description="Default Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  name="Derived Column Output"
-                  synchronousInputId="Package\Data Flow Task\Derived Column 2.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[conditionalColumn]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[conditionalColumn]"
-                      name="conditionalColumn"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">[REVERSE](#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]})</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">REVERSE(HomeTeam)</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[conditionalColumn2]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[conditionalColumn2]"
-                      name="conditionalColumn2"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">[LEN](#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]})</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">LEN(HomeTeam)</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[conditionalColumn3]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      length="4"
-                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[conditionalColumn3]"
-                      name="conditionalColumn3"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">[LEFT](#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]},4)</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">LEFT(HomeTeam,4)</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Error Output]"
-                  description="Error Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Derived Column Error Output"
-                  synchronousInputId="Package\Data Flow Task\Derived Column 2.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -934,6 +785,110 @@
               </outputs>
             </component>
             <component
+              refId="Package\Data Flow Task\Incompatible"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Incompatible"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Incompatible.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Incompatible.Inputs[Derived Column Input].Columns[HomeTeam]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="HomeTeam"
+                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Incompatible.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Output].Columns[LeftColumn]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Output].Columns[LeftColumn]"
+                      name="LeftColumn"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[LEFT](#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]},2)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">LEFT(HomeTeam,2)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Output].Columns[LenColumn]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Output].Columns[LenColumn]"
+                      name="LenColumn"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[LEN](#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[HomeTeam]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">LEN(HomeTeam)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Incompatible.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Data Flow Task\OLE DB Destination"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
@@ -949,7 +904,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Liverpool]</property>
+                  name="OpenRowset">[dbo].[CompatibleDist]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1083,25 +1038,19 @@
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[DateKey]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[conditionalColumn]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReverseColumn]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="conditionalColumn"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn]"
-                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[conditionalColumn]" />
+                      cachedName="ReverseColumn"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReverseColumn]"
+                      lineageId="Package\Data Flow Task\Compatible.Outputs[Derived Column Output].Columns[ReverseColumn]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[conditionalColumn2]"
-                      cachedDataType="i4"
-                      cachedName="conditionalColumn2"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn2]"
-                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[conditionalColumn2]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[conditionalColumn3]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UpperColumn]"
                       cachedDataType="wstr"
-                      cachedLength="4"
-                      cachedName="conditionalColumn3"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn3]"
-                      lineageId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output].Columns[conditionalColumn3]" />
+                      cachedLength="50"
+                      cachedName="UpperColumn"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UpperColumn]"
+                      lineageId="Package\Data Flow Task\Compatible.Outputs[Derived Column Output].Columns[UpperColumn]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1159,19 +1108,15 @@
                       length="10"
                       name="DateKey" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReverseColumn]"
                       dataType="wstr"
                       length="255"
-                      name="conditionalColumn" />
+                      name="ReverseColumn" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn2]"
-                      dataType="i4"
-                      name="conditionalColumn2" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn3]"
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UpperColumn]"
                       dataType="wstr"
-                      length="4"
-                      name="conditionalColumn3" />
+                      length="255"
+                      name="UpperColumn" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1216,7 +1161,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[Liverpool2]</property>
+                  name="OpenRowset">[dbo].[IncompatibleDist]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1350,77 +1295,68 @@
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[DateKey]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[conditionalColumn]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="conditionalColumn"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn]"
-                      lineageId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[conditionalColumn]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[conditionalColumn2]"
-                      cachedDataType="i4"
-                      cachedName="conditionalColumn2"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn2]"
-                      lineageId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[conditionalColumn2]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[conditionalColumn3]"
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[LeftColumn]"
                       cachedDataType="wstr"
                       cachedLength="2"
-                      cachedName="conditionalColumn3"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn3]"
-                      lineageId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output].Columns[conditionalColumn3]" />
+                      cachedName="LeftColumn"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LeftColumn]"
+                      lineageId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Output].Columns[LeftColumn]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[LenColumn]"
+                      cachedDataType="i4"
+                      cachedName="LenColumn"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LenColumn]"
+                      lineageId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Output].Columns[LenColumn]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
                       dataType="wstr"
-                      length="50"
+                      length="255"
                       name="Date" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[HomeTeam]"
                       dataType="wstr"
-                      length="50"
+                      length="255"
                       name="HomeTeam" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AwayTeam]"
                       dataType="wstr"
-                      length="50"
+                      length="255"
                       name="AwayTeam" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[FTHG]"
-                      dataType="wstr"
-                      length="50"
+                      dataType="r8"
                       name="FTHG" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[FTAG]"
-                      dataType="wstr"
-                      length="50"
+                      dataType="r8"
                       name="FTAG" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[FTR]"
                       dataType="wstr"
-                      length="50"
+                      length="255"
                       name="FTR" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[HTHG]"
                       dataType="wstr"
-                      length="50"
+                      length="255"
                       name="HTHG" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[HTAG]"
                       dataType="wstr"
-                      length="50"
+                      length="255"
                       name="HTAG" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[HTR]"
                       dataType="wstr"
-                      length="50"
+                      length="255"
                       name="HTR" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Season]"
                       dataType="wstr"
-                      length="50"
+                      length="255"
                       name="Season" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
@@ -1428,19 +1364,14 @@
                       length="10"
                       name="DateKey" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn]"
-                      dataType="wstr"
-                      length="255"
-                      name="conditionalColumn" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn2]"
-                      dataType="i4"
-                      name="conditionalColumn2" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[conditionalColumn3]"
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LeftColumn]"
                       dataType="wstr"
                       length="2"
-                      name="conditionalColumn3" />
+                      name="LeftColumn" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LenColumn]"
+                      dataType="i4"
+                      name="LenColumn" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1478,14 +1409,14 @@
               startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
             <path
               refId="Package\Data Flow Task.Paths[Derived Column Output1]"
-              endId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
-              name="Derived Column Output"
-              startId="Package\Data Flow Task\Derived Column 1.Outputs[Derived Column Output]" />
-            <path
-              refId="Package\Data Flow Task.Paths[Derived Column Output2]"
               endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="Derived Column Output"
-              startId="Package\Data Flow Task\Derived Column 2.Outputs[Derived Column Output]" />
+              startId="Package\Data Flow Task\Compatible.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output2]"
+              endId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Incompatible.Outputs[Derived Column Output]" />
             <path
               refId="Package\Data Flow Task.Paths[Flat File Source Output]"
               endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
@@ -1493,12 +1424,12 @@
               startId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output]" />
             <path
               refId="Package\Data Flow Task.Paths[GraterThan 3]"
-              endId="Package\Data Flow Task\Derived Column 2.Inputs[Derived Column Input]"
+              endId="Package\Data Flow Task\Compatible.Inputs[Derived Column Input]"
               name="GraterThan 3"
               startId="Package\Data Flow Task\Conditional Split.Outputs[GraterThan 2]" />
             <path
               refId="Package\Data Flow Task.Paths[lessThan 3]"
-              endId="Package\Data Flow Task\Derived Column 1.Inputs[Derived Column Input]"
+              endId="Package\Data Flow Task\Incompatible.Inputs[Derived Column Input]"
               name="lessThan 3"
               startId="Package\Data Flow Task\Conditional Split.Outputs[lessThan 2]" />
           </paths>
@@ -1531,21 +1462,17 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\Data Flow Task\Derived Column 1"
+          Size="139.2,41.6"
+          Id="Package\Data Flow Task\Incompatible"
           TopLeft="30.2857114636168,272.894120049394" />
         <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Data Flow Task\Derived Column 2"
+          Size="131.2,41.6"
+          Id="Package\Data Flow Task\Compatible"
           TopLeft="285.28571112302,260.364705346118" />
         <NodeLayout
           Size="150.4,41.6"
           Id="Package\Data Flow Task\Flat File Source"
           TopLeft="63.8571406067634,36.235293377642" />
-        <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="565.714295348343,394.211770111137" />
         <NodeLayout
           Size="154.4,41.6"
           Id="Package\Data Flow Task\Conditional Split"
@@ -1555,74 +1482,38 @@
           Id="Package\Data Flow Task\Derived Column"
           TopLeft="122.571426248064,114.588233535265" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[lessThan 3]"
-          TopLeft="175.228570175658,231.14117770393">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-63.7428587120417,41.7529423454639"
-              Start="0,0"
-              End="-63.7428587120417,34.2529423454639">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,12.9581181218499" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,12.9581181218499"
-                    Point2="0,16.9581181218499"
-                    Point3="-4,16.9581181218499" />
-                  <mssgle:LineSegment
-                    End="-59.7428587120417,16.9581181218499" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-59.7428587120417,16.9581181218499"
-                    Point2="-63.7428587120417,16.9581181218499"
-                    Point3="-63.7428587120417,20.9581181218499" />
-                  <mssgle:LineSegment
-                    End="-63.7428587120417,34.2529423454639" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-55.9643981060209,21.9581181218499,48.1859375,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package\Data Flow Task.Paths[GraterThan 3]"
           TopLeft="224.028570175658,231.14117770393">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="137.657140947361,29.2235276421876"
+              EndConnector="126.857140947362,29.223527642188"
               Start="0,0"
-              End="137.657140947361,21.7235276421876">
+              End="126.857140947362,21.723527642188">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,7.86924815005775" />
+                    End="0,7.8692481500579" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,7.86924815005775"
-                    Point2="0,11.8692481500578"
-                    Point3="4,11.8692481500578" />
+                    Point1="0,7.8692481500579"
+                    Point2="0,11.8692481500579"
+                    Point3="4,11.8692481500579" />
                   <mssgle:LineSegment
-                    End="133.657140947361,11.8692481500578" />
+                    End="122.857140947362,11.8692481500579" />
                   <mssgle:CubicBezierSegment
-                    Point1="133.657140947361,11.8692481500578"
-                    Point2="137.657140947361,11.8692481500578"
-                    Point3="137.657140947361,15.8692481500578" />
+                    Point1="122.857140947362,11.8692481500579"
+                    Point2="126.857140947362,11.8692481500579"
+                    Point3="126.857140947362,15.8692481500579" />
                   <mssgle:LineSegment
-                    End="137.657140947361,21.7235276421876" />
+                    End="126.857140947362,21.723527642188" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="38.9299376611806,16.8692481500578,59.797265625,9.7490234375"
+              BoundingBox="33.5299376611811,16.8692481500579,59.797265625,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1682,36 +1573,72 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="179.2,41.6"
-          Id="Package\Data Flow Task\OLE DB Destination 1"
-          TopLeft="70.0000011920929,424.152946721146" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Derived Column Output1]"
-          TopLeft="111.485711463617,314.494120049394">
+          Id="Package\Data Flow Task.Paths[lessThan 3]"
+          TopLeft="175.228570175658,231.14117770393">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="48.1142897284761,109.658826671752"
+              EndConnector="-75.3428587120412,41.752942345464"
               Start="0,0"
-              End="48.1142897284761,102.158826671752">
+              End="-75.3428587120412,34.252942345464">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,50.8294133358762" />
+                    End="0,12.95811812185" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,50.8294133358762"
-                    Point2="0,54.8294133358762"
-                    Point3="4,54.8294133358762" />
+                    Point1="0,12.95811812185"
+                    Point2="0,16.95811812185"
+                    Point3="-4,16.95811812185" />
                   <mssgle:LineSegment
-                    End="44.1142897284761,54.8294133358762" />
+                    End="-71.3428587120412,16.95811812185" />
                   <mssgle:CubicBezierSegment
-                    Point1="44.1142897284761,54.8294133358762"
-                    Point2="48.1142897284761,54.8294133358762"
-                    Point3="48.1142897284761,58.8294133358762" />
+                    Point1="-71.3428587120412,16.95811812185"
+                    Point2="-75.3428587120412,16.95811812185"
+                    Point3="-75.3428587120412,20.95811812185" />
                   <mssgle:LineSegment
-                    End="48.1142897284761,102.158826671752" />
+                    End="-75.3428587120412,34.252942345464" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-61.7643981060206,21.95811812185,48.1859375,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Data Flow Task\OLE DB Destination"
+          TopLeft="360.000006130764,358.647063853419" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output1]"
+          TopLeft="350.88571112302,301.964705346118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="94.3142950077435,56.682358507301"
+              Start="0,0"
+              End="94.3142950077435,49.182358507301">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.3411792536505" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.3411792536505"
+                    Point2="0,28.3411792536505"
+                    Point3="4,28.3411792536505" />
+                  <mssgle:LineSegment
+                    End="90.3142950077435,28.3411792536505" />
+                  <mssgle:CubicBezierSegment
+                    Point1="90.3142950077435,28.3411792536505"
+                    Point2="94.3142950077435,28.3411792536505"
+                    Point3="94.3142950077435,32.3411792536505" />
+                  <mssgle:LineSegment
+                    End="94.3142950077435,49.182358507301" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1720,32 +1647,36 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Data Flow Task\OLE DB Destination 1"
+          TopLeft="99.28571597654,380.823534752671" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Derived Column Output2]"
-          TopLeft="361.68571112302,301.964705346118">
+          TopLeft="99.8857114636168,314.494120049394">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="289.228584225323,92.247064765019"
+              EndConnector="89.0000045129232,66.3294147032769"
               Start="0,0"
-              End="289.228584225323,84.747064765019">
+              End="89.0000045129232,58.8294147032769">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,42.1235323825095" />
+                    End="0,29.1647073516385" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,42.1235323825095"
-                    Point2="0,46.1235323825095"
-                    Point3="4,46.1235323825095" />
+                    Point1="0,29.1647073516385"
+                    Point2="0,33.1647073516385"
+                    Point3="4,33.1647073516385" />
                   <mssgle:LineSegment
-                    End="285.228584225323,46.1235323825095" />
+                    End="85.0000045129232,33.1647073516385" />
                   <mssgle:CubicBezierSegment
-                    Point1="285.228584225323,46.1235323825095"
-                    Point2="289.228584225323,46.1235323825095"
-                    Point3="289.228584225323,50.1235323825095" />
+                    Point1="85.0000045129232,33.1647073516385"
+                    Point2="89.0000045129232,33.1647073516385"
+                    Point3="89.0000045129232,37.1647073516385" />
                   <mssgle:LineSegment
-                    End="289.228584225323,84.747064765019" />
+                    End="89.0000045129232,58.8294147032769" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
