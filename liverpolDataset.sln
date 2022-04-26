@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "liverpolDataset", "liverpolDataset\liverpolDataset.dtproj", "{752F3CA7-8413-4F0B-B7F7-7CA96F09F781}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{752F3CA7-8413-4F0B-B7F7-7CA96F09F781}.Development|Default.ActiveCfg = Development
+		{752F3CA7-8413-4F0B-B7F7-7CA96F09F781}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5DD4FC0-8383-4605-B3C8-96256BF5D499}
+	EndGlobalSection
+EndGlobal
